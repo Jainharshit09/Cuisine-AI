@@ -1,11 +1,13 @@
+
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 // pages/api/socket.ts
 import { Server as IOServer } from 'socket.io';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { Server as HTTPServer } from 'http';
 import type { Socket as NetSocket } from 'net';
 
 // Allow extending Node HTTP server to store the Socket.IO server
-type NextApiResponseWithSocket = NextApiResponse & {
+type NextApiResponseWithSocket = {
   socket: NetSocket & {
     server: HTTPServer & {
       io?: IOServer;
@@ -17,12 +19,12 @@ export const config = {
   api: { bodyParser: false },
 };
 
-export default function handler(req: NextApiRequest, res: NextApiResponseWithSocket) {
+function socketHandler(res: NextApiResponseWithSocket) {
   if (!res.socket.server.io) {
     console.log('🔌 Initializing new Socket.IO server...');
 
     const io = new IOServer(res.socket.server, {
-      path: '/api/socketio', // optional, use a custom path
+      path: '/api/socketio',
       addTrailingSlash: false,
     });
 
@@ -41,6 +43,46 @@ export default function handler(req: NextApiRequest, res: NextApiResponseWithSoc
   } else {
     console.log('🟢 Reusing existing Socket.IO server');
   }
+}
 
-  res.end();
+export async function GET(request: Request) {
+  // @ts-ignore
+  socketHandler((request as any).res);
+  return new Response(null, { status: 200 });
+}
+
+export async function POST(request: Request) {
+  // @ts-ignore
+  socketHandler((request as any).res);
+  return new Response(null, { status: 200 });
+}
+
+export async function PUT(request: Request) {
+  // @ts-ignore
+  socketHandler((request as any).res);
+  return new Response(null, { status: 200 });
+}
+
+export async function DELETE(request: Request) {
+  // @ts-ignore
+  socketHandler((request as any).res);
+  return new Response(null, { status: 200 });
+}
+
+export async function PATCH(request: Request) {
+  // @ts-ignore
+  socketHandler((request as any).res);
+  return new Response(null, { status: 200 });
+}
+
+export async function OPTIONS(request: Request) {
+  // @ts-ignore
+  socketHandler((request as any).res);
+  return new Response(null, { status: 200 });
+}
+
+export async function HEAD(request: Request) {
+  // @ts-ignore
+  socketHandler((request as any).res);
+  return new Response(null, { status: 200 });
 }

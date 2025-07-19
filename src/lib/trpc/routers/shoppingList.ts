@@ -64,7 +64,7 @@ export const shoppingListRouter = router({
         newItems.forEach(newItem => {
           const exists = allItems.some(item =>
             (typeof item === 'string' && item === newItem.ingredient) ||
-            (typeof item === 'object' && item.ingredient === newItem.ingredient)
+            (typeof item === 'object' && item !== null && !Array.isArray(item) && (item as { ingredient?: string }).ingredient === newItem.ingredient)
           );
           if (!exists) {
             allItems.push(newItem);
