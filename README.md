@@ -1,4 +1,4 @@
-# Culinary Assistant
+# Cuisine AI
 
 A Next.js-based culinary assistant that helps you generate recipes, plan meals, and manage your shopping list with AI-powered features.
 
@@ -13,6 +13,7 @@ A Next.js-based culinary assistant that helps you generate recipes, plan meals, 
   - View and manage your shopping lists
 - **Ingredient Detection**: Upload images to detect ingredients using AI
 - **User Authentication**: Secure authentication with Clerk
+- **Background Jobs with Ingest**: Efficiently process tasks like nutrition analysis, image ingredient detection, and shopping list updating using [Ingest](https://ingest.dev) for background jobs.
 
 ## Getting Started
 
@@ -37,6 +38,7 @@ Make sure to set up the following environment variables:
 - `GEMINI_API_KEY`: Your Google Gemini API key for AI features
 - `DATABASE_URL`: Your PostgreSQL database connection string
 - Clerk authentication variables (see Clerk documentation)
+- `INGEST_API_KEY`: Your Ingest API key for background job processing
 
 ## Database Setup
 
@@ -58,9 +60,16 @@ When you generate a recipe using AI, the ingredients are automatically added to 
 ### Recipe Generation Flow
 1. Upload ingredients or enter them manually
 2. AI generates a recipe with instructions
-3. Nutrition analysis is performed automatically
+3. Nutrition analysis is performed automatically via an Ingest background job
 4. Recipe is saved to your collection
-5. **Ingredients are automatically added to your shopping list**
+5. **Ingredients are automatically added to your shopping list via Ingest job**
+
+### Background Job Processing (Ingest)
+Intensive tasks like nutrition analysis, ingredient detection from images, and shopping list updates are handled by [Ingest](https://ingest.dev) background jobs. This ensures a responsive user experience and scalable processing.
+
+- **Nutrition Analysis**: Offloaded to Ingest for asynchronous processing.
+- **Shopping List Update**: Ingredients from recipes are added to your shopping list via background jobs.
+- **Ingredient Detection**: Image analysis runs as an Ingest job.
 
 ## Learn More
 
