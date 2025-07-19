@@ -1,10 +1,8 @@
-@import "tailwindcss";
-@import "tw-animate-css";
 @import "tailwindcss/preflight";
-@tailwind utilities;
+@import "tailwindcss/utilities";
 
+/* Optional: Custom plugin imports after tailwind layers */
 @import "tw-animate-css";
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
