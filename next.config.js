@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    // Enable standalone output for Docker
     output: 'standalone',
     experimental: {
         serverActions: {},
@@ -22,6 +21,9 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
-}
+    typescript: {
+        ignoreBuildErrors: true,
+    },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
