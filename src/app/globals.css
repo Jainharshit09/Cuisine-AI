@@ -1,5 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "tailwindcss/preflight";
+@tailwind utilities;
+
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -202,3 +206,4 @@
     transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
+
